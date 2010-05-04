@@ -1,0 +1,23 @@
+= Accept values for
+
+
+
+== DESCRIPTION
+
+In order to spec a complex validation for ActiveRecord models
+Implemented accept_values_for custom matcher
+
+== SYNOPSIS: 
+  
+  describe User do
+
+    subject { User.new(@valid_attributes)}
+    
+
+
+    it { should accept_values_for(:email, "john@example.com", "lambda@gusiev.com") }
+    it { should_not accept_values_for(:email, "invalid", nil, "a@b", "john@.com") }
+
+  end
+
+
