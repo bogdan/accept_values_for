@@ -37,7 +37,7 @@ class AcceptValuesFor  #:nodoc:
     @model = model
     return false unless model.is_a?(ActiveRecord::Base)
     @values.each do |value|
-      model[@attribute] = value
+      model.send("#{@attribute}=", value)
       unless model.valid?
         @failed_value = value
         return false 
