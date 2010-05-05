@@ -35,7 +35,7 @@ class AcceptValuesFor  #:nodoc:
 
   def matches?(model)
     @model = model
-    return false unless model.is_a?(ActiveRecord::Base) && model.has_attribute?(@attribute)
+    return false unless model.is_a?(ActiveRecord::Base)
     @values.each do |value|
       model[@attribute] = value
       unless model.valid?
