@@ -23,3 +23,7 @@ Implemented accept_values_for custom matcher
 == INSTALL:
 
   [sudo] gem install accept_values_for
+
+
+  spec_helper.rb:
+  require 'accept_values_for'
