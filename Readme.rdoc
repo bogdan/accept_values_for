@@ -20,4 +20,6 @@ Implemented accept_values_for custom matcher
 
   end
 
+== INSTALL:
 
+  [sudo] gem install accept_values_for
