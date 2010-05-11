@@ -1,0 +1,36 @@
+h1. Accept values for
+
+h2. Description
+
+In order to spec a complex validation for ActiveRecord models.
+Implemented accept_values_for custom matcher.
+With this matcher you can specify which values of model attribute should be accepted by model validation and which should not.
+
+
+h2. Usage
+
+  <code>
+  describe User do
+
+    subject { User.new(@valid_attributes)}
+    
+
+
+    it { should accept_values_for(:email, "john@example.com", "lambda@gusiev.com") }
+    it { should_not accept_values_for(:email, "invalid", nil, "a@b", "john@.com") }
+
+  end
+  </code>
+
+h2. Dependencies
+
+  * ActiveRecord
+  * Rspec
+
+h2. Install
+
+
+  <code>[sudo] gem install accept_values_for</code>
+
+  spec_helper.rb:
+  <code>require 'accept_values_for'</code>
