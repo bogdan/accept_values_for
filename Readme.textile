@@ -9,7 +9,7 @@ With this matcher you can specify which values of model attribute should be acce
 
 h2. Usage
 
-  <code>
+  <pre>
   describe User do
 
     subject { User.new(@valid_attributes)}
@@ -20,7 +20,7 @@ h2. Usage
     it { should_not accept_values_for(:email, "invalid", nil, "a@b", "john@.com") }
 
   end
-  </code>
+  </pre>
 
 h2. Dependencies
 
@@ -30,7 +30,10 @@ h2. Dependencies
 h2. Install
 
 
-  <code>[sudo] gem install accept_values_for</code>
+h3. Command line:
 
-  spec_helper.rb:
-  <code>require 'accept_values_for'</code>
+  <pre>[sudo] gem install accept_values_for</pre>
+
+h3. spec_helper.rb:
+
+  <pre>require 'accept_values_for'</pre>
