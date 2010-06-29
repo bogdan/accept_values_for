@@ -7,18 +7,17 @@ if defined?(ActiveRecord)
   #   model.should accept_values_for(attribute, value1, value2 ...)
   #   model.should_not accept_values_for(attribute, value1, value2 ...)
   #
-  # model should be a valid ActiveRecord model
+  # model should be an instance of ActiveRecord::Base
   # attribute should be the model attribute name
   #
-  # Use this if you want to check that model will be valid 
-  # with the given values for the given attribute
+  # Use this if you want to check that model should not have errors 
+  # on specified attribute with the given values
   #
   # == Examples
   #
   #   user.should accept_values_for(:email, "john@example.com", "lambda@gusiev.com")
   #   user.should_not accept_values_for(:email, "invalid", nil, "a@b", "john@.com")
   #
-  # IMPORTANT: passed model should be valid. Use fixtures or factories to create one.
   #
   def accept_values_for(attribute, *values)
     AcceptValuesFor.new(attribute, *values)
@@ -40,6 +39,20 @@ class AcceptValuesFor  #:nodoc:
       model.send("#{@attribute}=", value)
       model.valid?
       if model.errors.on(@attribute)
+        @failed_value = value
+        return false 
+      end
+    end
+    return true
+  end
+
+  def does_not_match?(model)
+    @model = model
+    return false unless model.is_a?(ActiveRecord::Base)
+    @values.each do |value|
+      model.send("#{@attribute}=", value)
+      model.valid?
+      unless model.errors.on(@attribute)
         @failed_value = value
         return false 
       end
