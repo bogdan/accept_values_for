@@ -3,6 +3,7 @@ require 'spec'
 require 'spec/autorun'
 require 'active_record'
 require 'lib/accept_values_for'
+require 'lib/discover'
 
 ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :database => ":memory:")
 ActiveRecord::Base.configurations = true
@@ -13,6 +14,7 @@ ActiveRecord::Schema.define(:version => 1) do
   create_table :people do |t|
     t.string :gender
     t.integer :group_id
+    t.string :name
   end
 
   create_table :groups do |t|
@@ -23,7 +25,14 @@ end
 Spec::Runner.configure do |config|
   config.before(:each) do
     class ::Group < ActiveRecord::Base
-
+      has_many :people
+      
+      named_scope :by_char, lambda { |char| 
+        { 
+          :conditions => ["name like ?", char + "%"],
+          :order => "name"
+        } 
+      }
     end
 
     class ::Person < ActiveRecord::Base
