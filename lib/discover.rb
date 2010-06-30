@@ -48,6 +48,14 @@ module Rspec
       return valid_findness? && valid_indexes?
     end
 
+    def does_not_match?(scope)
+      @scope = scope
+      if @after_objects.any?
+        raise "calling #after is not allowed with should_not match"
+      end
+      return valid_not_findness?
+    end
+
     def failure_message_for_should
       result = "expected #{@scope.inspect} to include objects: #{@objects.inspect} " 
       result += after_string
@@ -72,14 +80,19 @@ module Rspec
     protected
 
     def valid_findness?
-      !((@objects + @after_objects).any?{|o| @scope.index(o) == nil})
+      ((@objects + @after_objects) - @scope).empty?
     end
+
 
     def valid_indexes?
       return true if @after_objects.blank?
       min_index = @objects.map{|o| @scope.index(o)}.min
       index_range = @after_objects.map{|o| @scope.index(o)}.reverse + [min_index]
       index_range == index_range.sort
+    end
+
+    def valid_not_findness?
+      @scope - @objects == @scope
     end
 
     def invalid_scope_string
