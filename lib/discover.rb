@@ -65,7 +65,7 @@ module Rspec
     end
 
     def failure_message_for_should_not
-      result = "expected #{@scope.inspect} to include objects: #{@objects.inspect} " 
+      result = "expected #{@scope.inspect} to not include objects: #{@objects.inspect} " 
       result += after_string
       result += ", but it was." 
       result += found_objects_string
@@ -93,10 +93,6 @@ module Rspec
 
     def valid_not_findness?
       @scope - @objects == @scope
-    end
-
-    def invalid_scope_string
-      "expected #{scope} to be an instance of ActiveRecord::NamedScope::Scope but it wasn't"
     end
 
     def found_objects_string
