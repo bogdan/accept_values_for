@@ -35,11 +35,10 @@ module Rspec
 
     def initialize(*objects)
       @objects = objects
-      @after_objects = []
     end
 
-    def after(object)
-      @after_objects << object
+    def with_exact_order
+      @with_exact_order = true
       self
     end
 
@@ -50,15 +49,15 @@ module Rspec
 
     def does_not_match?(scope)
       @scope = scope
-      if @after_objects.any?
-        raise "calling #after is not allowed with should_not match"
+      if @with_exact_order
+        raise "calling #with_exact_order is not allowed with should_not match"
       end
       return valid_not_findness?
     end
 
     def failure_message_for_should
       result = "expected #{@scope.inspect} to include objects: #{@objects.inspect} " 
-      result += after_string
+      result += ordering_string
       result += ",but it was not.\n" 
       result += found_objects_string
       result
@@ -66,7 +65,7 @@ module Rspec
 
     def failure_message_for_should_not
       result = "expected #{@scope.inspect} to not include objects: #{@objects.inspect} " 
-      result += after_string
+      result += ordering_string
       result += ", but it was." 
       result += found_objects_string
       result
@@ -74,21 +73,20 @@ module Rspec
 
 
     def description
-      "discover #{@objects.map(&:inspect).join(', ')} " + after_string
+      "discover #{@objects.map(&:inspect).join(', ')} " + ordering_string
     end
 
     protected
 
     def valid_findness?
-      ((@objects + @after_objects) - @scope).empty?
+      (@objects - @scope).empty?
     end
 
 
     def valid_indexes?
-      return true if @after_objects.blank?
-      min_index = @objects.map{|o| @scope.index(o)}.min
-      index_range = @after_objects.map{|o| @scope.index(o)}.reverse + [min_index]
-      index_range == index_range.sort
+      return true unless @with_exact_order
+      indexes = @objects.map{|o| @scope.index(o)}
+      return indexes.sort == indexes
     end
 
     def valid_not_findness?
@@ -100,13 +98,8 @@ module Rspec
     end
 
 
-    def after_string
-      return "" if @after_objects.blank?
-      result = ""
-      @after_objects.each do |after_object|
-        result += "after: #{after_object.inspect} "
-      end
-      result
+    def ordering_string
+      @with_exact_order ? "with exact order" : ""
     end
 
   end
