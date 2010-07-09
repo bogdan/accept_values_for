@@ -56,16 +56,16 @@ module Rspec
     end
 
     def failure_message_for_should
-      result = "expected #{@scope.inspect} to include objects: #{@objects.inspect} " 
-      result += ordering_string
+      result = @not_found_object_ids.any? ? 
+        "expected #{@scope.inspect} to include objects: #{@not_found_object_ids.inspect} " :
+        "expected #{@scope.inspect} to be ordered as: #{@objects.map(&:id).inspect}"
       result += ",but it was not.\n" 
       result += found_objects_string
       result
     end
 
     def failure_message_for_should_not
-      result = "expected #{@scope.inspect} to not include objects: #{@objects.inspect} " 
-      result += ordering_string
+      result = "expected #{@scope.inspect} to not include objects: #{@found_object_ids.inspect} " 
       result += ", but it was." 
       result += found_objects_string
       result
@@ -79,7 +79,15 @@ module Rspec
     protected
 
     def valid_findness?
-      (@objects - @scope).empty?
+      result = true
+      @not_found_object_ids = []
+      @objects.each do |object|
+        unless @scope.include?(object)
+          @not_found_object_ids << object.id
+          result = false
+        end
+      end
+      result
     end
 
 
@@ -90,7 +98,15 @@ module Rspec
     end
 
     def valid_not_findness?
-      @scope - @objects == @scope
+      result = true
+      @found_object_ids = []
+      @objects.each do |object|
+        if @scope.include?(object)
+          @found_object_ids << object.id
+          result = false
+        end
+      end
+      result
     end
 
     def found_objects_string
