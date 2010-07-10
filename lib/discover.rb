@@ -21,7 +21,7 @@ if defined?(ActiveRecord)
   #
   #   Group.approved.should discover(Group.create!(:approved => true))
   #   Group.approved.should_not discover(Group.create!(:approved => false))
-  #   Group.order_by_name.should discover(Group.create!(:name => "bear").after(Group.create!(:name => "apple")))
+  #   Group.order_by_name.should discover(Group.create!(:name => "apple"), Group.create!(:name => "bear").with_exact_order)
   #
   #
   def discover(*objects)
