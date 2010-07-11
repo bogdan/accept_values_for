@@ -57,16 +57,18 @@ module Rspec
 
     def failure_message_for_should
       result = @not_found_object_ids.any? ? 
-        "expected #{@scope.inspect} to include objects: #{@not_found_object_ids.inspect} " :
+        "expected #{@scope.inspect} to include objects: #{@not_found_object_ids.inspect}" :
         "expected #{@scope.inspect} to be ordered as: #{@objects.map(&:id).inspect}"
-      result += ",but it was not.\n" 
-      result += found_objects_string
+      result += ", but it was not. " 
+      if @not_found_object_ids.any?
+        result += found_objects_string
+      end
       result
     end
 
     def failure_message_for_should_not
-      result = "expected #{@scope.inspect} to not include objects: #{@found_object_ids.inspect} " 
-      result += ", but it was." 
+      result = "expected #{@scope.inspect} to not include objects: #{@found_object_ids.inspect}" 
+      result += ", but it was. " 
       result += found_objects_string
       result
     end
