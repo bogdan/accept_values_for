@@ -62,8 +62,6 @@ describe "Discover" do
     it { should_not discover(ruby) }
     it { should_not discover(ruby, python) }
 
-    it { discover(ruby, java).matches?(subject).should be_false}
-    it { discover(jruby, java).with_exact_order.matches?(subject).should be_false}
   end
 
 
