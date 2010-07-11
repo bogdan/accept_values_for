@@ -4,7 +4,8 @@ if defined?(ActiveRecord)
   # Implemented discover custom matcher
   #
   # :call-seq:
-  #   Class.named_scope.should discover(model1, model2).after(model3)
+  #   Class.named_scope.should discover(model1, model2)
+  #   Class.named_scope.should_not discover(model3, model4)
   #
   # matcher subject should be an instance of ActiverRecord::NamedScope::Scoped or Array
   # models should be an instace of ActiverRecord::Base
