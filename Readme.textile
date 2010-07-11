@@ -2,25 +2,67 @@ h1. Accept values for
 
 h2. Description
 
-In order to spec a complex validation for ActiveRecord models.
-Implemented accept_values_for custom matcher.
-With this matcher you can specify which values of model attribute should be accepted by model validation and which should not.
+  In order to spec ActiveRecord models.
+  I decided to write a few custom matchers that makes the work match easier:
 
 
-h2. Usage
+h2. Matchers
 
-  <pre>
-  describe User do
+* accept_values_for
+* discover
 
-    subject { User.new(@valid_attributes)}
-    
+h3. Accept values for
+
+"Rpec matcher to test the validation":http://gusiev.com/2010/06/ultimate-rspec-matcher-to-test-validation/
+
+<pre>
+describe User do
+
+  subject { User.new(@valid_attributes)}
+  
 
 
-    it { should accept_values_for(:email, "john@example.com", "lambda@gusiev.com") }
-    it { should_not accept_values_for(:email, "invalid", nil, "a@b", "john@.com") }
+  it { should accept_values_for(:email, "john@example.com", "lambda@gusiev.com") }
+  it { should_not accept_values_for(:email, "invalid", nil, "a@b", "john@.com") }
 
+end</pre>
+
+h3. Discovery matcher
+
+"Rspec matcher to test named scopes":http://gusiev.com/2010/07/bdd-rspec-matcher-to-test-named_scope-scoped-rails
+
+
+<pre><code>describe "#by_category_id named scope" do
+  let(:given_category) do 
+    Factory.create(:given_category)
   end
-  </pre>
+
+
+  let(:product_in_given_category) do
+    Factory.create(
+      :product,
+      :categories => [category]
+    )
+  end
+
+  let(:product_not_in_given_category) do
+    Factory.create(
+      :product,
+      :categories => [Factory.create(:category)]
+    )
+  end
+
+  # This might be tricky to redefine subject as the finder result
+  # but in this way we can delegate the matcher to subject and 
+  # avoid writing test descriptions.
+  subject { described_class.by_category_id(given_category.id) }
+
+  it { should discover(product_in_given_category) }
+  it { should_not discover(product_not_in_given_category) }
+
+end
+</code></pre> 
+
 
 h2. Dependencies
 
