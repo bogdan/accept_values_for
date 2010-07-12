@@ -78,4 +78,5 @@ h3. Command line:
 
 h3. spec_helper.rb:
 
-  <pre>require 'accept_values_for'</pre>
+  <pre>require 'accept_values_for'
+require 'discover'</pre>
