@@ -38,7 +38,7 @@ class AcceptValuesFor  #:nodoc:
     @values.each do |value|
       model.send("#{@attribute}=", value)
       model.valid?
-      if model.errors.on(@attribute)
+      unless model.errors[@attribute].to_a.empty?
         @failed_value = value
         return false 
       end
@@ -52,7 +52,7 @@ class AcceptValuesFor  #:nodoc:
     @values.each do |value|
       model.send("#{@attribute}=", value)
       model.valid?
-      unless model.errors.on(@attribute)
+      if model.errors[@attribute].to_a.empty?
         @failed_value = value
         return false 
       end

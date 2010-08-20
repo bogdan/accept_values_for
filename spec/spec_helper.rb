@@ -1,4 +1,8 @@
-require 'rubygems'
+require "rubygems"
+require "bundler"
+Bundler.setup
+
+require 'sqlite3'
 require 'spec'
 require 'spec/autorun'
 require 'active_record'
@@ -27,7 +31,7 @@ Spec::Runner.configure do |config|
     class ::Group < ActiveRecord::Base
       has_many :people
       
-      named_scope :by_char, lambda { |char| 
+      scope :by_char, lambda { |char| 
         { 
           :conditions => ["name like ?", char + "%"],
           :order => "name"
