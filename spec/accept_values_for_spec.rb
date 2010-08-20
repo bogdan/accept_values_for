@@ -11,4 +11,11 @@ describe "AcceptValuesFor" do
   it "should have custom condition for should_not" do
     accept_values_for(:gender, "INVALID", "MALE").does_not_match?(subject).should be_false
   end
+  
+  it 'should properly display failure message for should' do
+    avf = AcceptValuesFor.new(:gender, 'INVALID')
+    avf.matches?(Person.new)
+    avf.failure_message_for_should.should =~ /expected/
+    puts avf.failure_message_for_should
+  end
 end
