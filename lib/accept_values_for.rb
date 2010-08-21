@@ -64,7 +64,7 @@ class AcceptValuesFor  #:nodoc:
     result = "expected #{@model.inspect} to accept value #{@failed_value.inspect} for #{@attribute.inspect}, but it was not\n" 
     if @model.respond_to?(:errors) && ActiveModel::Errors === @model.errors 
       result += "Errors: " + @model.errors[(@attribute)].to_a.
-        map{|a| "#{@model.class.human_attribute_name @attribute} #{a}"}.join(", ")
+        map{|a| "#{@attribute} #{a}"}.join(", ")
     end
     result
   end
