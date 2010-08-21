@@ -16,6 +16,5 @@ describe "AcceptValuesFor" do
     avf = AcceptValuesFor.new(:gender, 'INVALID')
     avf.matches?(Person.new)
     avf.failure_message_for_should.should =~ /expected/
-    puts avf.failure_message_for_should
   end
 end
