@@ -11,4 +11,14 @@ describe "AcceptValuesFor" do
   it "should have custom condition for should_not" do
     accept_values_for(:gender, "INVALID", "MALE").does_not_match?(subject).should be_false
   end
+
+  describe "#matches?" do
+    let(:matcher) { accept_values_for(:gender, "INVALID") }
+
+    it "should return false if one of values is not accepted" do
+      matcher.matches?(subject).should be_false
+      matcher.failure_message_for_should.should == "expected #{subject.inspect} to accept value \"INVALID\" for :gender, but it was not\n" +
+        "Errors: is not included in the list"
+    end
+  end
 end

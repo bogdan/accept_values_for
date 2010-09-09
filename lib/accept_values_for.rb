@@ -63,7 +63,7 @@ class AcceptValuesFor  #:nodoc:
   def failure_message_for_should
     result = "expected #{@model.inspect} to accept value #{@failed_value.inspect} for #{@attribute.inspect}, but it was not\n" 
     if @model.respond_to?(:errors) && ActiveRecord::Errors === @model.errors 
-      result += "Errors: " + @model.errors.on(@attribute).full_messages.join(", ")
+      result += "Errors: " + Array(@model.errors.on(@attribute)).join(", ")
     end
     result
   end
