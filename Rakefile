@@ -1,10 +1,11 @@
 require 'rubygems'
-require 'rake'
-require 'spec/rake/spectask'
+require "bundler"
+Bundler.setup
 
-Spec::Rake::SpecTask.new(:spec) do |spec|
-  spec.libs << 'lib' << 'spec'
-  spec.spec_files = FileList['spec/**/*_spec.rb']
+require 'rake'
+require 'rspec/core/rake_task'
+
+RSpec::Core::RakeTask.new(:spec) do |spec|
 end
 
 begin

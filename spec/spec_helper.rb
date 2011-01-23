@@ -1,10 +1,6 @@
-require "rubygems"
-require "bundler"
-Bundler.setup
-
 require 'sqlite3'
-require 'spec'
-require 'spec/autorun'
+require 'rspec'
+require 'rspec/autorun'
 require 'active_record'
 require 'lib/accept_values_for'
 require 'lib/discover'
@@ -26,7 +22,7 @@ ActiveRecord::Schema.define(:version => 1) do
   end
 end
 
-Spec::Runner.configure do |config|
+RSpec.configure do |config|
   config.before(:each) do
     class ::Group < ActiveRecord::Base
       has_many :people

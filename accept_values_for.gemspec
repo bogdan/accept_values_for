@@ -5,18 +5,19 @@
 
 Gem::Specification.new do |s|
   s.name = %q{accept_values_for}
-  s.version = "0.3.0"
+  s.version = "0.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Bogdan Gusiev", 'Mike Auclair']
-  s.date = %q{2010-08-20}
+  s.date = %q{2010-09-09}
   s.description = %q{Rspec: When you have a complex validation(e.g. regexp or custom method) on ActiveRecord model
 you have to write annoying easy specs on which values should be accepted by your validation method and which should not.
 accepts_values_for rspec matcher simplify the code. See example for more information.
 }
   s.email = %q{agresso@gmail.com}
   s.files = [
-    "Gemfile",
+    "Changelog.textile",
+     "Gemfile",
      "Rakefile",
      "Readme.textile",
      "VERSION",
