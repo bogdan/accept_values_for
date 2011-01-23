@@ -1,3 +1,8 @@
+h3. 0.4.0
+
+* Migrated to ActiveRecord 3.0
+* Migrated to Rspec 2.0
+
 h3. 0.3.0
 
 * add 'discover' matcher to test named scopes
