@@ -44,7 +44,7 @@ class AcceptValuesFor  #:nodoc:
     @values.each do |value|
       model.send("#{@attribute}=", value)
       model.valid?
-      if model.errors.on(@attribute)
+      if model.errors[@attribute]
         @failed_value = value
         return false 
       end
@@ -58,7 +58,7 @@ class AcceptValuesFor  #:nodoc:
     @values.each do |value|
       model.send("#{@attribute}=", value)
       model.valid?
-      unless model.errors.on(@attribute)
+      unless model.errors[@attribute]
         @failed_value = value
         return false 
       end
@@ -69,7 +69,7 @@ class AcceptValuesFor  #:nodoc:
   def failure_message_for_should
     result = "expected #{@model.inspect} to accept value #{@failed_value.inspect} for #{@attribute.inspect}, but it was not\n" 
     if @model.respond_to?(:errors) && @model.errors.is_a?(@error_class)
-      result += "Errors: " + Array(@model.errors.on(@attribute)).join(", ")
+      result += "Errors: " + Array(@model.errors[@attribute]).join(", ")
     end
     result
   end
