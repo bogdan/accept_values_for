@@ -23,11 +23,6 @@ if defined?(ActiveModel)
     AcceptValuesFor.new(attribute, *values)
   end
   
-  if defined?(ActiveRecord)
-    @error_class = ActiveRecord::Errors
-  else
-    @error_class = ActiveModel::Errors
-  end
   
 end
 
@@ -36,6 +31,12 @@ class AcceptValuesFor  #:nodoc:
   def initialize(attribute, *values)
     @attribute = attribute
     @values = values
+
+    if defined?(ActiveRecord)
+      @error_class = ActiveRecord::Errors
+    else
+      @error_class = ActiveModel::Errors
+    end
   end
 
   def matches?(model)
