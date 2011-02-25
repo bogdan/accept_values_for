@@ -21,8 +21,8 @@ EOI
     gemspec.email = "agresso@gmail.com"
     gemspec.homepage = "http://github.com/bogdan/accept_values_for"
     gemspec.authors = ["Bogdan Gusiev"]
-    gemspec.add_dependency "activerecord"
-    gemspec.add_dependency "rspec"
+    #gemspec.add_dependency "activerecord"
+    #gemspec.add_dependency "rspec"
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: [sudo] gem install jeweler"
