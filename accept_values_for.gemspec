@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{accept_values_for}
-  s.version = "0.4.0"
+  s.version = "0.4.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Bogdan Gusiev"]
@@ -36,10 +36,7 @@ accepts_values_for rspec matcher simplify the code. See example for more informa
   s.test_files = [
     "spec/accept_values_for_spec.rb",
     "spec/discover_spec.rb",
-    "spec/spec_helper.rb",
-    "test/lib/test.rb",
-    "test/test/helper.rb",
-    "test/test/test_test.rb"
+    "spec/spec_helper.rb"
   ]
 
   if s.respond_to? :specification_version then
