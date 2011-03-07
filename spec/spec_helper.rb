@@ -5,8 +5,14 @@ require 'active_record'
 require 'lib/accept_values_for'
 require 'lib/discover'
 
+require "rspec/rails/adapters"
+require "rspec/rails/fixture_support"
+
 ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :database => ":memory:")
 ActiveRecord::Base.configurations = true
+
+File.open('spec.log', "w").close
+ActiveRecord::Base.logger = Logger.new('spec.log')
 
 ActiveRecord::Schema.verbose = false
 ActiveRecord::Schema.define(:version => 1) do
@@ -23,6 +29,7 @@ ActiveRecord::Schema.define(:version => 1) do
 end
 
 RSpec.configure do |config|
+  config.use_transactional_examples = true
   config.before(:each) do
     class ::Group < ActiveRecord::Base
       has_many :people

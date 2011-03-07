@@ -56,8 +56,10 @@ describe "Discover" do
     it { should discover(java) }
 
     it { should discover(json, java, jruby) }
-    it { should discover(java, jruby, json).with_exact_order }
+
+    it { should discover(java, jruby, json).with_exact_order}
     it { should discover(java, json).with_exact_order }
+    
 
     it { should_not discover(ruby) }
     it { should_not discover(ruby, python) }
