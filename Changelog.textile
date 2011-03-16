@@ -1,4 +1,4 @@
-h3 0.4.2
+h3. 0.4.2
 
 * Make suitable to use with any ORM based on ActiveModel::Validations
 
