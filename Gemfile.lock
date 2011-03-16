@@ -67,6 +67,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activemodel (>= 3.0.0)
   activerecord (>= 3.0.0)
   jeweler
   rspec

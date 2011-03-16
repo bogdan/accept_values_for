@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Bogdan Gusiev"]
-  s.date = %q{2011-02-25}
+  s.date = %q{2011-03-16}
   s.description = %q{Rspec: When you have a complex validation(e.g. regexp or custom method) on ActiveRecord model
 you have to write annoying easy specs on which values should be accepted by your validation method and which should not.
 accepts_values_for rspec matcher simplify the code. See example for more information.
@@ -44,19 +44,25 @@ accepts_values_for rspec matcher simplify the code. See example for more informa
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<activerecord>, [">= 3.0.0"])
+      s.add_runtime_dependency(%q<activemodel>, [">= 3.0.0"])
       s.add_runtime_dependency(%q<rspec>, [">= 0"])
+      s.add_development_dependency(%q<activerecord>, [">= 3.0.0"])
+      s.add_development_dependency(%q<rspec-rails>, [">= 2.0.0"])
       s.add_development_dependency(%q<jeweler>, [">= 0"])
       s.add_development_dependency(%q<sqlite3-ruby>, [">= 0"])
     else
-      s.add_dependency(%q<activerecord>, [">= 3.0.0"])
+      s.add_dependency(%q<activemodel>, [">= 3.0.0"])
       s.add_dependency(%q<rspec>, [">= 0"])
+      s.add_dependency(%q<activerecord>, [">= 3.0.0"])
+      s.add_dependency(%q<rspec-rails>, [">= 2.0.0"])
       s.add_dependency(%q<jeweler>, [">= 0"])
       s.add_dependency(%q<sqlite3-ruby>, [">= 0"])
     end
   else
-    s.add_dependency(%q<activerecord>, [">= 3.0.0"])
+    s.add_dependency(%q<activemodel>, [">= 3.0.0"])
     s.add_dependency(%q<rspec>, [">= 0"])
+    s.add_dependency(%q<activerecord>, [">= 3.0.0"])
+    s.add_dependency(%q<rspec-rails>, [">= 2.0.0"])
     s.add_dependency(%q<jeweler>, [">= 0"])
     s.add_dependency(%q<sqlite3-ruby>, [">= 0"])
   end

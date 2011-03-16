@@ -32,11 +32,6 @@ class AcceptValuesFor  #:nodoc:
     @attribute = attribute
     @values = values
 
-    if defined?(ActiveRecord)
-      @error_class = ActiveRecord::Errors
-    else
-      @error_class = ActiveModel::Errors
-    end
   end
 
   def matches?(model)
@@ -69,8 +64,8 @@ class AcceptValuesFor  #:nodoc:
 
   def failure_message_for_should
     result = "expected #{@model.inspect} to accept value #{@failed_value.inspect} for #{@attribute.inspect}, but it was not\n" 
-    if @model.respond_to?(:errors) && @model.errors.is_a?(@error_class)
-      result += "Errors: " + Array(@model.errors[@attribute]).join(", ")
+    if @model.respond_to?(:errors) && @model.errors.is_a?(ActiveModel::Errors)
+      result += "Errors: #{@attribute} " + Array(@model.errors[@attribute]).join(", ")
     end
     result
   end
@@ -82,5 +77,6 @@ class AcceptValuesFor  #:nodoc:
   def description
     "accept values #{@values.map(&:inspect).join(', ')} for #{@attribute.inspect} attribute"
   end
+
 end
 

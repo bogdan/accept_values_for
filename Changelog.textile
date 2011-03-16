@@ -1,3 +1,7 @@
+h3 0.4.2
+
+* Make suitable to use with any ORM based on ActiveModel::Validations
+
 h3. 0.4.0
 
 * Migrated to ActiveRecord 3.0
