@@ -1,4 +1,4 @@
-if defined?(ActiveRecord)
+if defined?(ActiveModel)
   
   # In order to spec a complex validation for ActiveRecord models
   # Implemented accept_values_for custom matcher
@@ -23,6 +23,7 @@ if defined?(ActiveRecord)
     AcceptValuesFor.new(attribute, *values)
   end
   
+  
 end
 
 class AcceptValuesFor  #:nodoc:
@@ -30,11 +31,17 @@ class AcceptValuesFor  #:nodoc:
   def initialize(attribute, *values)
     @attribute = attribute
     @values = values
+
+    if defined?(ActiveRecord)
+      @error_class = ActiveRecord::Errors
+    else
+      @error_class = ActiveModel::Errors
+    end
   end
 
   def matches?(model)
     @model = model
-    return false unless model.is_a?(ActiveRecord::Base)
+    return false unless model.class.included_modules.include?(ActiveModel::Validations)
     @values.each do |value|
       model.send("#{@attribute}=", value)
       model.valid?
@@ -48,7 +55,7 @@ class AcceptValuesFor  #:nodoc:
 
   def does_not_match?(model)
     @model = model
-    return false unless model.is_a?(ActiveRecord::Base)
+    return false unless model.class.included_modules.include?(ActiveModel::Validations)
     @values.each do |value|
       model.send("#{@attribute}=", value)
       model.valid?
@@ -62,9 +69,8 @@ class AcceptValuesFor  #:nodoc:
 
   def failure_message_for_should
     result = "expected #{@model.inspect} to accept value #{@failed_value.inspect} for #{@attribute.inspect}, but it was not\n" 
-    if @model.respond_to?(:errors) && ActiveModel::Errors === @model.errors 
-      result += "Errors: " + @model.errors[(@attribute)].to_a.
-        map{|a| "#{@attribute} #{a}"}.join(", ")
+    if @model.respond_to?(:errors) && @model.errors.is_a?(@error_class)
+      result += "Errors: " + Array(@model.errors[@attribute]).join(", ")
     end
     result
   end
@@ -76,7 +82,5 @@ class AcceptValuesFor  #:nodoc:
   def description
     "accept values #{@values.map(&:inspect).join(', ')} for #{@attribute.inspect} attribute"
   end
-
-
 end
 
