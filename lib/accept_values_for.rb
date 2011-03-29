@@ -35,35 +35,37 @@ class AcceptValuesFor  #:nodoc:
   end
 
   def matches?(model)
+    old_value = model.send("#{@attribute}")
     @model = model
     return false unless model.class.included_modules.include?(ActiveModel::Validations)
     @values.each do |value|
-      old_value = model.send("#{@attribute}")
       model.send("#{@attribute}=", value)
       model.valid?
-      model.send("#{@attribute}=", old_value)
       unless model.errors[@attribute].to_a.empty?
         @failed_value = value
         return false 
       end
     end
     return true
+  ensure
+    model.send("#{@attribute}=", old_value)
   end
 
   def does_not_match?(model)
+    old_value = model.send("#{@attribute}")
     @model = model
     return false unless model.class.included_modules.include?(ActiveModel::Validations)
     @values.each do |value|
-      old_value = model.send("#{@attribute}")
       model.send("#{@attribute}=", value)
       model.valid?
-      model.send("#{@attribute}=", old_value)
       if model.errors[@attribute].to_a.empty?
         @failed_value = value
         return false 
       end
     end
     return true
+  ensure
+    model.send("#{@attribute}=", old_value)
   end
 
   def failure_message_for_should
