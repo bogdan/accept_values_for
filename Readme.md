@@ -1,38 +1,38 @@
-h1. Accept values for
+# Accept values for
 
-h2. Description
+## Description
 
-  In order to spec ActiveRecord models.
-  I decided to write a few custom matchers that makes the work match easier:
+In order to spec ActiveRecord models.
+I decided to write a few custom matchers that makes the work match easier:
 
 
-h2. Matchers
+## Matchers
 
 * accept_values_for
 * discover
 
-h3. Accept values for
+### Accept values for
 
 "Rpec matcher to test the validation":http://gusiev.com/2010/06/ultimate-rspec-matcher-to-test-validation/
 
-<pre>
+
+``` ruby
 describe User do
 
   subject { User.new(@valid_attributes)}
   
-
-
   it { should accept_values_for(:email, "john@example.com", "lambda@gusiev.com") }
   it { should_not accept_values_for(:email, "invalid", nil, "a@b", "john@.com") }
+end
+```
 
-end</pre>
-
-h3. Discovery matcher
+### Discovery matcher
 
 "Rspec matcher to test named scopes":http://gusiev.com/2010/07/bdd-rspec-matcher-to-test-named_scope-scoped-rails
 
 
-<pre><code>describe "#by_category_id named scope" do
+``` ruby
+describe "#by_category_id named scope" do
   let(:given_category) do 
     Factory.create(:given_category)
   end
@@ -60,23 +60,27 @@ h3. Discovery matcher
   it { should discover(product_in_given_category) }
   it { should_not discover(product_not_in_given_category) }
 
-end
-</code></pre> 
+end 
+```
 
 
-h2. Dependencies
+## Dependencies
 
   * ActiveRecord
   * Rspec
 
-h2. Install
+## Install
 
 
-h3. Command line:
+### Gemfile
 
-  <pre>[sudo] gem install accept_values_for</pre>
+``` ruby
+gem 'accept_values_for'
+```
 
-h3. spec_helper.rb:
+### spec_helper.rb:
 
-  <pre>require 'accept_values_for'
-require 'discover'</pre>
+``` ruby
+require 'accept_values_for'
+require 'discover'
+```
