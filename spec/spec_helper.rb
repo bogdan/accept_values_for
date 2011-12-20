@@ -2,6 +2,8 @@ require 'sqlite3'
 require 'rspec'
 require 'rspec/autorun'
 require 'active_record'
+
+$LOAD_PATH << "."
 require 'lib/accept_values_for'
 require 'lib/discover'
 
