@@ -13,7 +13,7 @@ I decided to write a few custom matchers that makes the work match easier:
 
 ### Accept values for
 
-"Rpec matcher to test the validation":http://gusiev.com/2010/06/ultimate-rspec-matcher-to-test-validation/
+"RSpec matcher to test the validation":http://gusiev.com/2010/06/ultimate-rspec-matcher-to-test-validation/
 
 
 ``` ruby
@@ -28,7 +28,7 @@ end
 
 ### Discovery matcher
 
-"Rspec matcher to test named scopes":http://gusiev.com/2010/07/bdd-rspec-matcher-to-test-named_scope-scoped-rails
+"RSpec matcher to test named scopes":http://gusiev.com/2010/07/bdd-rspec-matcher-to-test-named_scope-scoped-rails
 
 
 ``` ruby
@@ -41,7 +41,7 @@ describe "#by_category_id named scope" do
   let(:product_in_given_category) do
     Factory.create(
       :product,
-      :categories => [category]
+      :categories => [given_category]
     )
   end
 
