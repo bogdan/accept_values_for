@@ -90,6 +90,6 @@ require 'discover'
 
 Like accept\_values\_for? 
 
-Follow the repository on [GitHub](https://github.com/bogdan/datagrid/toggle_watch). 
+Follow the repository on [GitHub](https://github.com/bogdan/accept_values_for/toggle_watch). 
 
 Read [author blog](http://gusiev.com).
