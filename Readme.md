@@ -84,3 +84,12 @@ gem 'accept_values_for'
 require 'accept_values_for'
 require 'discover'
 ```
+
+
+## Self-Promotion
+
+Like accept\_values\_for? 
+
+Follow the repository on [GitHub](https://github.com/bogdan/datagrid/toggle_watch). 
+
+Read [author blog](http://gusiev.com).
