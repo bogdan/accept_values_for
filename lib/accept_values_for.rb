@@ -28,8 +28,12 @@ end
 
 class AcceptValuesFor  #:nodoc:
 
-  def initialize(attribute, *values)
-    @attribute = attribute
+  def initialize(attributes, *values)
+    if attributes.kind_of?(Array)
+      @attribute, @label = attributes
+    else
+      @attribute = attributes
+    end
     @values = values
 
   end
@@ -81,7 +85,7 @@ class AcceptValuesFor  #:nodoc:
   end
 
   def description
-    "accept values #{@values.map(&:inspect).join(', ')} for #{@attribute.inspect} attribute"
+    "accept values #{@label || @values.map(&:inspect).join(', ')} for #{@attribute.inspect} attribute"
   end
 
 end

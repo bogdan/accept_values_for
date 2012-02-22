@@ -48,6 +48,7 @@ RSpec.configure do |config|
       belongs_to :group
       validates_inclusion_of :gender, :in => ["MALE", "FEMALE"]
       validates_presence_of :group
+      validates_length_of :name, :maximum => 64
     end
   end
 
