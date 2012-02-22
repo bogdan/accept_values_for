@@ -35,12 +35,12 @@ RSpec.configure do |config|
   config.before(:each) do
     class ::Group < ActiveRecord::Base
       has_many :people
-      
-      scope :by_char, lambda { |char| 
-        { 
+
+      scope :by_char, lambda { |char|
+        {
           :conditions => ["name like ?", char + "%"],
           :order => "name"
-        } 
+        }
       }
     end
 
@@ -48,6 +48,7 @@ RSpec.configure do |config|
       belongs_to :group
       validates_inclusion_of :gender, :in => ["MALE", "FEMALE"]
       validates_presence_of :group
+      validates_length_of :name, :maximum => 64
     end
   end
 

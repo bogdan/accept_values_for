@@ -1,5 +1,5 @@
 if defined?(ActiveModel)
-  
+
   # In order to spec a complex validation for ActiveRecord models
   # Implemented accept_values_for custom matcher
   #
@@ -10,7 +10,7 @@ if defined?(ActiveModel)
   # model should be an instance of ActiveRecord::Base
   # attribute should be the model attribute name
   #
-  # Use this if you want to check that model should not have errors 
+  # Use this if you want to check that model should not have errors
   # on specified attribute with the given values
   #
   # == Examples
@@ -22,14 +22,18 @@ if defined?(ActiveModel)
   def accept_values_for(attribute, *values)
     AcceptValuesFor.new(attribute, *values)
   end
-  
-  
+
+
 end
 
 class AcceptValuesFor  #:nodoc:
 
-  def initialize(attribute, *values)
-    @attribute = attribute
+  def initialize(attributes, *values)
+    if attributes.kind_of?(Array)
+      @attribute, @label = attributes
+    else
+      @attribute = attributes
+    end
     @values = values
 
   end
@@ -43,7 +47,7 @@ class AcceptValuesFor  #:nodoc:
       model.valid?
       unless model.errors[@attribute].to_a.empty?
         @failed_value = value
-        return false 
+        return false
       end
     end
     return true
@@ -60,7 +64,7 @@ class AcceptValuesFor  #:nodoc:
       model.valid?
       if model.errors[@attribute].to_a.empty?
         @failed_value = value
-        return false 
+        return false
       end
     end
     return true
@@ -69,7 +73,7 @@ class AcceptValuesFor  #:nodoc:
   end
 
   def failure_message_for_should
-    result = "expected #{@model.inspect} to accept value #{@failed_value.inspect} for #{@attribute.inspect}, but it was not\n" 
+    result = "expected #{@model.inspect} to accept value #{@failed_value.inspect} for #{@attribute.inspect}, but it was not\n"
     if @model.respond_to?(:errors) && @model.errors.is_a?(ActiveModel::Errors)
       result += "Errors: #{@attribute} " + Array(@model.errors[@attribute]).join(", ")
     end
@@ -77,11 +81,11 @@ class AcceptValuesFor  #:nodoc:
   end
 
   def failure_message_for_should_not
-    "expected #{@model.inspect} to not accept value #{@failed_value.inspect} for #{@attribute.inspect} attribute, but was" 
+    "expected #{@model.inspect} to not accept value #{@failed_value.inspect} for #{@attribute.inspect} attribute, but was"
   end
 
   def description
-    "accept values #{@values.map(&:inspect).join(', ')} for #{@attribute.inspect} attribute"
+    "accept values #{@label || @values.map(&:inspect).join(', ')} for #{@attribute.inspect} attribute"
   end
 
 end
