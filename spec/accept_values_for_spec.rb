@@ -34,6 +34,6 @@ describe "AcceptValuesFor" do
     it { should_not accept_values_for(:gender, "INVALID", nil)}
     it { should_not accept_values_for(:group, nil) }
     it { should accept_values_for(:group, Group.new) }
-    it { should_not accept_values_for([:name, "are over 64 characters"], "a" * 65)}
+    it { should_not accept_values_for([:name, "longer than 64 characters"], "a" * 65)}
   end
 end
