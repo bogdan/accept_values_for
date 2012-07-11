@@ -39,7 +39,7 @@ class AcceptValuesFor  #:nodoc:
     return false unless model.class.included_modules.include?(ActiveModel::Validations)
     old_value = @model.send(@attribute)
     @values.each do |value|
-      model.send("#{@attribute}=", value)
+      model.stub!(:"#{@attribute}").and_return(value)
       model.valid?
       unless model.errors[@attribute].to_a.empty?
         @failed_value = value
@@ -56,7 +56,7 @@ class AcceptValuesFor  #:nodoc:
     return false unless model.class.included_modules.include?(ActiveModel::Validations)
     old_value = @model.send(@attribute)
     @values.each do |value|
-      model.send("#{@attribute}=", value)
+      model.stub!(:"#{@attribute}").and_return(value)
       model.valid?
       if model.errors[@attribute].to_a.empty?
         @failed_value = value
