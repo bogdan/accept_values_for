@@ -28,7 +28,7 @@ if defined?(ActiveRecord)
   def discover(*objects)
     Rspec::Discover.new(*objects)
   end
-
+  warn "Using #discover from accept_values_for is deprecated. Use rspec built in #include instead"
 end
 
 module Rspec
