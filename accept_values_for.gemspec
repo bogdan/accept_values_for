@@ -4,23 +4,25 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{accept_values_for}
-  s.version = "0.4.3"
+  s.name = "accept_values_for"
+  s.version = "0.4.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Bogdan Gusiev"]
-  s.date = %q{2011-03-30}
-  s.description = %q{Rspec: When you have a complex validation(e.g. regexp or custom method) on ActiveRecord model
-you have to write annoying easy specs on which values should be accepted by your validation method and which should not.
-accepts_values_for rspec matcher simplify the code. See example for more information.
-}
-  s.email = %q{agresso@gmail.com}
+  s.date = "2012-10-05"
+  s.description = "Rspec: When you have a complex validation(e.g. regexp or custom method) on ActiveRecord model\nyou have to write annoying easy specs on which values should be accepted by your validation method and which should not.\naccepts_values_for rspec matcher simplify the code. See example for more information.\n"
+  s.email = "agresso@gmail.com"
+  s.extra_rdoc_files = [
+    "LICENSE"
+  ]
   s.files = [
+    ".travis.yml",
     "Changelog.textile",
     "Gemfile",
     "Gemfile.lock",
+    "LICENSE",
     "Rakefile",
-    "Readme.textile",
+    "Readme.md",
     "VERSION",
     "accept_values_for.gemspec",
     "lib/accept_values_for.rb",
@@ -29,10 +31,10 @@ accepts_values_for rspec matcher simplify the code. See example for more informa
     "spec/discover_spec.rb",
     "spec/spec_helper.rb"
   ]
-  s.homepage = %q{http://github.com/bogdan/accept_values_for}
+  s.homepage = "http://github.com/bogdan/accept_values_for"
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.7}
-  s.summary = %q{In order to test a complex validation for ActiveRecord models Implemented accept_values_for custom rspec matcher}
+  s.rubygems_version = "1.8.24"
+  s.summary = "In order to test a complex validation for ActiveRecord models Implemented accept_values_for custom rspec matcher"
   s.test_files = [
     "spec/accept_values_for_spec.rb",
     "spec/discover_spec.rb",
@@ -40,7 +42,6 @@ accepts_values_for rspec matcher simplify the code. See example for more informa
   ]
 
   if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
