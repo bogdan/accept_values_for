@@ -2,19 +2,11 @@
 
 ## Description
 
-In order to spec ActiveRecord models.
-I decided to write a few custom matchers that makes the work match easier:
+This gem provides an rspec matcher that helps you to test ActiveModel validation.
 
-
-## Matchers
-
-* accept_values_for
-* discover
-
-### Accept values for
+## Usage
 
 [RSpec matcher to test the validation](http://gusiev.com/2010/06/ultimate-rspec-matcher-to-test-validation/)
-
 
 ``` ruby
 describe User do
@@ -26,48 +18,13 @@ describe User do
 end
 ```
 
-### Discovery matcher
-
-[RSpec matcher to test named scopes](http://gusiev.com/2010/07/bdd-rspec-matcher-to-test-named_scope-scoped-rails)
-
-
-``` ruby
-describe "#by_category_id named scope" do
-  let(:given_category) do 
-    Factory.create(:given_category)
-  end
-
-
-  let(:product_in_given_category) do
-    Factory.create(
-      :product,
-      :categories => [given_category]
-    )
-  end
-
-  let(:product_not_in_given_category) do
-    Factory.create(
-      :product,
-      :categories => [Factory.create(:category)]
-    )
-  end
-
-  # This might be tricky to redefine subject as the finder result
-  # but in this way we can delegate the matcher to subject and 
-  # avoid writing test descriptions.
-  subject { described_class.by_category_id(given_category.id) }
-
-  it { should discover(product_in_given_category) }
-  it { should_not discover(product_not_in_given_category) }
-
-end 
-```
+You can specify which values should be accepted by model as valid and which values should not be accepted as invalid.
 
 
 ## Dependencies
 
-  * ActiveRecord
-  * Rspec
+* ActiveModel
+* Rspec
 
 ## Install
 
@@ -75,14 +32,9 @@ end
 ### Gemfile
 
 ``` ruby
-gem 'accept_values_for'
-```
-
-### spec_helper.rb:
-
-``` ruby
-require 'accept_values_for'
-require 'discover'
+group :test do
+  gem 'accept_values_for'
+end
 ```
 
 
@@ -90,6 +42,6 @@ require 'discover'
 
 Like accept\_values\_for? 
 
-Follow the repository on [GitHub](https://github.com/bogdan/accept_values_for/toggle_watch). 
+Follow the repository on [GitHub](https://github.com/bogdan/accept_values_for). 
 
 Read [author blog](http://gusiev.com).
