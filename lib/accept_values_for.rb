@@ -51,7 +51,7 @@ class AcceptValuesFor  #:nodoc:
   end
 
   def failure_message_for_should
-    result = "expected #{@model.inspect} to accept values #{@failed_values.keys.inspect} for #{@attribute.inspect}, but it was not\n"
+    result = "expected #{@model.inspect} to accept values #{formatted_failed_values} for #{@attribute.inspect}, but it was not\n"
     @failed_values.each do |key, value|
       result << "\nValue: #{key}\tErrors: #{@attribute} #{value}"
     end
@@ -59,7 +59,7 @@ class AcceptValuesFor  #:nodoc:
   end
 
   def failure_message_for_should_not
-    "expected #{@model.inspect} to not accept values #{@failed_values.keys.inspect} for #{@attribute.inspect} attribute, but was"
+    "expected #{@model.inspect} to not accept values #{formatted_failed_values} for #{@attribute.inspect} attribute, but was"
   end
 
   def description
@@ -73,7 +73,7 @@ class AcceptValuesFor  #:nodoc:
     old_value = @model.send(@attribute)
     @values.each do |value|
       model.send("#@attribute=", value)
-      next if model.valid?
+      model.valid?
       yield(value) if @model.respond_to?(:errors) && @model.errors.is_a?(ActiveModel::Errors)
     end
     return @failed_values.empty?
@@ -85,5 +85,8 @@ class AcceptValuesFor  #:nodoc:
     model.class.included_modules.include?(ActiveModel::Validations)
   end
 
+  def formatted_failed_values
+    @failed_values.keys.sort.map(&:inspect).join(", ")
+  end
 end
 
