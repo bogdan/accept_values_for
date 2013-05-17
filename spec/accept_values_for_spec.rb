@@ -18,6 +18,7 @@ describe "AcceptValuesFor" do
         accept_values_for_object.failure_message_for_should.should == "expected #{person.inspect} to accept values \"INVALID\" for :gender, but it was not\n\nValue: INVALID\tErrors: gender is not included in the list"
       end
       it "should assign the old value for attribute" do
+        accept_values_for_object.matches?(person)
         person.gender.should == 'MALE'
       end
     end
@@ -49,6 +50,7 @@ describe "AcceptValuesFor" do
         accept_values_for_object.failure_message_for_should_not.should == "expected #{person.inspect} to not accept values \"FEMALE\" for :gender attribute, but was"
       end
       it "should assign the old value for attribute" do
+        accept_values_for_object.does_not_match?(person)
         person.gender.should == 'MALE'
       end
     end
