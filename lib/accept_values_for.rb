@@ -52,8 +52,8 @@ class AcceptValuesFor  #:nodoc:
 
   def failure_message_for_should
     result = "expected #{@model.inspect} to accept values #{formatted_failed_values} for #{@attribute.inspect}, but it was not\n"
-    @failed_values.each do |key, value|
-      result << "\nValue: #{key}\tErrors: #{@attribute} #{value}"
+    @failed_values.keys.sort.each do |key|
+      result << "\nValue: #{key}\tErrors: #{@attribute} #{@failed_values[key]}"
     end
     result
   end
