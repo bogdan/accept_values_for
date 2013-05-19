@@ -31,58 +31,62 @@ class AcceptValuesFor  #:nodoc:
   def initialize(attribute, *values)
     @attribute = attribute
     @values = values
-
+    @failed_values = {}
   end
 
   def matches?(model)
-    @model = model
-    return false unless model.class.included_modules.include?(ActiveModel::Validations)
-    old_value = @model.send(@attribute)
-    @values.each do |value|
-      model.send("#{@attribute}=", value)
-      model.valid?
+    base_matches?(model) do |value|
       unless model.errors[@attribute].to_a.empty?
-        @failed_value = value
-        return false 
+        @failed_values[value] = Array(model.errors[@attribute]).join(", ")
       end
     end
-    return true
-  ensure
-    @model.send("#{@attribute}=", old_value) if defined?(old_value)
   end
 
   def does_not_match?(model)
-    @model = model
-    return false unless model.class.included_modules.include?(ActiveModel::Validations)
-    old_value = @model.send(@attribute)
-    @values.each do |value|
-      model.send("#{@attribute}=", value)
-      model.valid?
+    base_matches?(model) do |value|
       if model.errors[@attribute].to_a.empty?
-        @failed_value = value
-        return false 
+        @failed_values[value] = nil
       end
     end
-    return true
-  ensure
-    @model.send("#{@attribute}=", old_value) if defined?(old_value)
   end
 
   def failure_message_for_should
-    result = "expected #{@model.inspect} to accept value #{@failed_value.inspect} for #{@attribute.inspect}, but it was not\n" 
-    if @model.respond_to?(:errors) && @model.errors.is_a?(ActiveModel::Errors)
-      result += "Errors: #{@attribute} " + Array(@model.errors[@attribute]).join(", ")
+    result = "expected #{@model.inspect} to accept values #{formatted_failed_values} for #{@attribute.inspect}, but it was not\n"
+    @failed_values.keys.sort.each do |key|
+      result << "\nValue: #{key}\tErrors: #{@attribute} #{@failed_values[key]}"
     end
     result
   end
 
   def failure_message_for_should_not
-    "expected #{@model.inspect} to not accept value #{@failed_value.inspect} for #{@attribute.inspect} attribute, but was" 
+    "expected #{@model.inspect} to not accept values #{formatted_failed_values} for #{@attribute.inspect} attribute, but was"
   end
 
   def description
     "accept values #{@values.map(&:inspect).join(', ')} for #{@attribute.inspect} attribute"
   end
 
+  private
+  def base_matches?(model)
+    @model = model
+    !has_validations_module?(model) and return false
+    old_value = @model.send(@attribute)
+    @values.each do |value|
+      model.send("#@attribute=", value)
+      model.valid?
+      yield(value) if @model.respond_to?(:errors) && @model.errors.is_a?(ActiveModel::Errors)
+    end
+    return @failed_values.empty?
+  ensure
+    @model.send("#@attribute=", old_value) if defined?(old_value)
+  end
+
+  def has_validations_module?(model)
+    model.class.included_modules.include?(ActiveModel::Validations)
+  end
+
+  def formatted_failed_values
+    @failed_values.keys.sort.map(&:inspect).join(", ")
+  end
 end
 
