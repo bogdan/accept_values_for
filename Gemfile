@@ -1,5 +1,6 @@
-source :gemcutter
+source "https://rubygems.org"
 gem 'activemodel', '>=3.0.0'
+gem "bundler"
 gem "rspec", ">=0"
 
 group :development do
