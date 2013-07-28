@@ -1,11 +1,22 @@
-source "https://rubygems.org"
-gem 'activemodel', '>=3.0.0'
-gem "bundler"
-gem "rspec", ">=0"
+source 'https://rubygems.org'
 
-group :development do
-  gem "activerecord", ">=3.0.0"
-  gem "rspec-rails", ">=2.0.0"
+rails_version = ENV['RAILS_VERSION'] || 'default'
+
+rails = case rails_version
+when 'master'
+  { :github => 'rails/rails'}
+when "default"
+  '~> 3.2.0'
+else
+  "~> #{rails_version}"
+end
+
+gem 'activemodel', rails
+
+group :development, :test do
+  gem 'rspec', '>=0'
+  gem 'rails', rails
+  gem 'rspec-rails', '>=2.0.0'
   gem 'jeweler'
   gem 'sqlite3-ruby'
 end

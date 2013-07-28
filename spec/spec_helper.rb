@@ -1,14 +1,14 @@
+ENV["RAILS_ENV"] ||= 'test'
 require 'sqlite3'
 require 'rspec'
 require 'rspec/autorun'
-require 'active_record'
+require 'active_record/railtie'
 
 $LOAD_PATH << "."
 require 'lib/accept_values_for'
 require 'lib/discover'
 
-require "rspec/rails/adapters"
-require "rspec/rails/fixture_support"
+require 'rspec/rails'
 
 ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :database => ":memory:")
 ActiveRecord::Base.configurations = true
@@ -31,16 +31,13 @@ ActiveRecord::Schema.define(:version => 1) do
 end
 
 RSpec.configure do |config|
-  config.use_transactional_examples = true
+  config.use_transactional_fixtures = true
   config.before(:each) do
     class ::Group < ActiveRecord::Base
       has_many :people
       
       scope :by_char, lambda { |char| 
-        { 
-          :conditions => ["name like ?", char + "%"],
-          :order => "name"
-        } 
+        where('name like ?', char + '%').order('name')
       }
     end
 
