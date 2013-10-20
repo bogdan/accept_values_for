@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "accept_values_for"
-  s.version = "0.5.0"
+  s.version = "0.5.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Bogdan Gusiev"]
-  s.date = "2013-05-20"
+  s.date = "2013-10-20"
   s.description = "Rspec: When you have a complex validation(e.g. regexp or custom method) on ActiveRecord model\nyou have to write annoying easy specs on which values should be accepted by your validation method and which should not.\naccepts_values_for rspec matcher simplify the code. See example for more information.\n"
   s.email = "agresso@gmail.com"
   s.extra_rdoc_files = [
@@ -32,34 +32,31 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://github.com/bogdan/accept_values_for"
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.25"
+  s.rubygems_version = "1.8.24"
   s.summary = "In order to test a complex validation for ActiveRecord models Implemented accept_values_for custom rspec matcher"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<activemodel>, [">= 3.0.0"])
-      s.add_runtime_dependency(%q<bundler>, [">= 0"])
-      s.add_runtime_dependency(%q<rspec>, [">= 0"])
-      s.add_development_dependency(%q<activerecord>, [">= 3.0.0"])
+      s.add_runtime_dependency(%q<activemodel>, ["~> 3.2.0"])
+      s.add_development_dependency(%q<rspec>, [">= 0"])
+      s.add_development_dependency(%q<rails>, ["~> 3.2.0"])
       s.add_development_dependency(%q<rspec-rails>, [">= 2.0.0"])
       s.add_development_dependency(%q<jeweler>, [">= 0"])
       s.add_development_dependency(%q<sqlite3-ruby>, [">= 0"])
     else
-      s.add_dependency(%q<activemodel>, [">= 3.0.0"])
-      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<activemodel>, ["~> 3.2.0"])
       s.add_dependency(%q<rspec>, [">= 0"])
-      s.add_dependency(%q<activerecord>, [">= 3.0.0"])
+      s.add_dependency(%q<rails>, ["~> 3.2.0"])
       s.add_dependency(%q<rspec-rails>, [">= 2.0.0"])
       s.add_dependency(%q<jeweler>, [">= 0"])
       s.add_dependency(%q<sqlite3-ruby>, [">= 0"])
     end
   else
-    s.add_dependency(%q<activemodel>, [">= 3.0.0"])
-    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<activemodel>, ["~> 3.2.0"])
     s.add_dependency(%q<rspec>, [">= 0"])
-    s.add_dependency(%q<activerecord>, [">= 3.0.0"])
+    s.add_dependency(%q<rails>, ["~> 3.2.0"])
     s.add_dependency(%q<rspec-rails>, [">= 2.0.0"])
     s.add_dependency(%q<jeweler>, [">= 0"])
     s.add_dependency(%q<sqlite3-ruby>, [">= 0"])
