@@ -24,6 +24,7 @@ EOI
     #gemspec.add_dependency "activerecord"
     #gemspec.add_dependency "rspec"
   end
+  Jeweler::RubygemsDotOrgTasks.new 
 rescue LoadError
   puts "Jeweler not available. Install it with: [sudo] gem install jeweler"
 end
