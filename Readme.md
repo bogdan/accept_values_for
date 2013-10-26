@@ -4,7 +4,7 @@
 
 This gem provides an rspec matcher that helps you to test ActiveModel validation.
 
-*NOTE:* `discover` matcher that was previously here was extracted to its own gem
+*NOTE:* `discover` matcher that was previously here was extracted to its own gem: http://github.com/bogdan/discover
 
 ## Usage
 
