@@ -1,34 +1,26 @@
-begin
-  require "active_model"
-rescue LoadError
-end
+require "active_model"
 
-if defined?(ActiveModel)
-  
-  # In order to spec a complex validation for ActiveRecord models
-  # Implemented accept_values_for custom matcher
-  #
-  # :call-seq:
-  #   model.should accept_values_for(attribute, value1, value2 ...)
-  #   model.should_not accept_values_for(attribute, value1, value2 ...)
-  #
-  # model should be an instance of ActiveRecord::Base
-  # attribute should be the model attribute name
-  #
-  # Use this if you want to check that model should not have errors 
-  # on specified attribute with the given values
-  #
-  # == Examples
-  #
-  #   user.should accept_values_for(:email, "john@example.com", "lambda@gusiev.com")
-  #   user.should_not accept_values_for(:email, "invalid", nil, "a@b", "john@.com")
-  #
-  #
-  def accept_values_for(attribute, *values)
-    AcceptValuesFor.new(attribute, *values)
-  end
-  
-  
+# In order to spec a complex validation for ActiveRecord models
+# Implemented accept_values_for custom matcher
+#
+# :call-seq:
+#   model.should accept_values_for(attribute, value1, value2 ...)
+#   model.should_not accept_values_for(attribute, value1, value2 ...)
+#
+# model should be an instance of ActiveRecord::Base
+# attribute should be the model attribute name
+#
+# Use this if you want to check that model should not have errors
+# on specified attribute with the given values
+#
+# == Examples
+#
+#   user.should accept_values_for(:email, "john@example.com", "lambda@gusiev.com")
+#   user.should_not accept_values_for(:email, "invalid", nil, "a@b", "john@.com")
+#
+#
+def accept_values_for(attribute, *values)
+  AcceptValuesFor.new(attribute, *values)
 end
 
 class AcceptValuesFor  #:nodoc:
