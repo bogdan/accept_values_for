@@ -1,3 +1,8 @@
+begin
+  require "active_model"
+rescue LoadError
+end
+
 if defined?(ActiveModel)
   
   # In order to spec a complex validation for ActiveRecord models
