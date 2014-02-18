@@ -16,6 +16,9 @@ matrix:
       rvm: 1.8.7
     - gemfile: gemfiles/activemodel_4_0.gemfile
       rvm: 1.9.2
+  allow_failures:
+    - rvm: 1.8.7
+    - rvm: 1.9.2
 branches:
   only:
     - master
