@@ -1,24 +1,23 @@
 language: ruby
-env:
-  - "RAILS_VERSION=3.0.0"
-  - "RAILS_VERSION=3.1.0"
-  - "RAILS_VERSION=3.2.0"
-  - "RAILS_VERSION=4.0.0"
 rvm:
   - 1.8.7
   - 1.9.2
   - 1.9.3
   - 2.0.0
+gemfile:
+  - gemfiles/activemodel_3_0.gemfile
+  - gemfiles/activemodel_3_1.gemfile
+  - gemfiles/activemodel_3_2.gemfile
+  - gemfiles/activemodel_4_0.gemfile
 matrix:
   exclude:
-    - rvm: 1.8.7
-      env: "RAILS_VERSION=4.0.0"
-    - rvm: 1.9.2
-      env: "RAILS_VERSION=4.0.0"
+    - gemfile: gemfiles/activemodel_4_0.gemfile
+      rvm: 1.8.7
+    - gemfile: gemfiles/activemodel_4_0.gemfile
+      rvm: 1.9.2
 notifications:
-  email: 
+  email:
     - agresso@gmail.com
 branches:
   only:
     - master
-
