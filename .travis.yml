@@ -15,9 +15,6 @@ matrix:
       rvm: 1.8.7
     - gemfile: gemfiles/activemodel_4_0.gemfile
       rvm: 1.9.2
-notifications:
-  email:
-    - agresso@gmail.com
 branches:
   only:
     - master
