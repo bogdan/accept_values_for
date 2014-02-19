@@ -54,13 +54,9 @@ expected to reject values: #{values.inspect}
       @model = _model
       @errors = {}
 
-      original_value = model.send(attribute)
-
       values.each do |value|
         test_value(model, value)
       end
-    ensure
-      model.send("#{attribute}=", original_value)
     end
 
     def test_value(model, value)
