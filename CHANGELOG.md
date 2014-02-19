@@ -1,3 +1,10 @@
+# 0.6.0 / Unreleased
+
+* [ENHANCEMENT] Deprecate Rubies 1.8.7 and 1.9.2
+* [ENHANCEMENT] Remove `discover` matcher
+* [BUGFIX] Open dependency requirements to allow installation alongside Rails 4
+* [ENHANCEMENT] Replace Jeweler with Bundler
+
 # 0.5.1 / 2013-10-20
 
 * [ENHANCEMENT] Refactor matcher messaging
