@@ -50,17 +50,17 @@ expected to reject values: #{values.inspect}
 
     private
 
-    def test(model)
-      @model = model
+    def test(_model)
+      @model = _model
       @errors = {}
 
-      original_value = @model.send(attribute)
+      original_value = model.send(attribute)
 
       values.each do |value|
         test_value(model, value)
       end
     ensure
-      @model.send("#{attribute}=", original_value)
+      model.send("#{attribute}=", original_value)
     end
 
     def test_value(model, value)
