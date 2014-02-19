@@ -1,3 +1,4 @@
+require "active_model"
 require "rspec"
 
 require "accept_values_for/helpers"

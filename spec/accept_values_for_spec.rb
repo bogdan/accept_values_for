@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "AcceptValuesFor" do
-  let(:person) { Person.new(:gender => "MALE", :group => Group.new(:name => "Primary")) }
+  let(:person) { Person.new(:name => "John", :gender => "MALE") }
   let(:accept_values_for_object) { accept_values_for(:gender, *values) }
 
   describe "#matches?" do
@@ -111,7 +111,7 @@ expected to reject values: ["FEMALE", "MALE"]
     subject { person }
     it { should accept_values_for(:gender, "MALE", "FEMALE")}
     it { should_not accept_values_for(:gender, "INVALID", nil)}
-    it { should_not accept_values_for(:group, nil) }
-    it { should accept_values_for(:group, Group.new) }
+    it { should_not accept_values_for(:name, nil) }
+    it { should accept_values_for(:name, "John") }
   end
 end
