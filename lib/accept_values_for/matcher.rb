@@ -17,23 +17,35 @@ module AcceptValuesFor
       all_errors?
     end
 
-    # FIXME
     def failure_message_for_should
-      result = "expected #{model.inspect} to accept values #{formatted_failed_values} for #{@attribute.inspect}, but it was not\n"
-      errors.sort.each do |key, errors|
-        result << "\nValue: #{key}\tErrors: #{attribute} #{errors.join(", ")}"
+      message = <<-MSG
+
+expected to accept values: #{values.inspect}
+                 accepted: #{accepted_values.inspect}
+
+Errors:
+      MSG
+
+      pad = rejected_values.map { |v| v.inspect.length }.max
+      errors.each do |value, value_errors|
+        padded_value = value.inspect.rjust(pad, " ")
+        message << "  #{padded_value}: #{value_errors.inspect}\n"
       end
-      result
+
+      message << "\n"
     end
 
-    # FIXME
     def failure_message_for_should_not
-      "expected #{model.inspect} to not accept values #{formatted_failed_values} for #{attribute.inspect} attribute, but was"
+      <<-MSG
+
+expected to reject values: #{values.inspect}
+                 rejected: #{rejected_values.inspect}
+
+      MSG
     end
 
-    # FIXME
     def description
-      "accept values #{values.map(&:inspect).join(", ")} for #{attribute.inspect} attribute"
+      "accept values #{values.inspect} for #{attribute.inspect} attribute"
     end
 
     private
@@ -54,20 +66,24 @@ module AcceptValuesFor
     def test_value(model, value)
       model.send("#{attribute}=", value)
       model.valid?
-      errors[value] = model.errors[attribute]
+      value_errors = model.errors[attribute]
+      errors[value] = value_errors unless value_errors.empty?
     end
 
     def no_errors?
-      errors.values.all? { |e| e.empty? }
+      errors.empty?
     end
 
     def all_errors?
-      errors.values.all? { |e| !e.empty? }
+      errors.size == values.size
     end
 
-    # FIXME
-    def formatted_failed_values
-      errors.keys.sort.map(&:inspect).join(", ")
+    def accepted_values
+      values - rejected_values
+    end
+
+    def rejected_values
+      errors.keys
     end
   end
 end
