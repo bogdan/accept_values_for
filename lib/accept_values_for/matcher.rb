@@ -1,5 +1,3 @@
-require "active_model"
-
 module AcceptValuesFor
   class Matcher
     attr_reader :attribute, :values, :model
@@ -44,20 +42,15 @@ module AcceptValuesFor
     private
     def base_matches?(model)
       @model = model
-      !has_validations_module?(model) and return false
       old_value = model.send(attribute)
       values.each do |value|
         model.send("#{attribute}=", value)
         model.valid?
-        yield(value) if model.respond_to?(:errors) && model.errors.is_a?(ActiveModel::Errors)
+        yield(value)
       end
       return failed_values.empty?
     ensure
       model.send("#{attribute}=", old_value) if defined?(old_value)
-    end
-
-    def has_validations_module?(model)
-      model.class.included_modules.include?(ActiveModel::Validations)
     end
 
     def formatted_failed_values
