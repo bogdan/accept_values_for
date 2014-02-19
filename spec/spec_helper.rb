@@ -16,3 +16,7 @@ class Person
   validates_presence_of :name
   validates_inclusion_of :gender, :in => ["MALE", "FEMALE"]
 end
+
+RSpec.configure do |config|
+  config.order = "random"
+end
