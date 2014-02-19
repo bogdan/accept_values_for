@@ -164,12 +164,10 @@ expected to reject values: ["MALE", "INVALID"]
     end
   end
 
-  describe "API" do
-    it "provides the accept_values_for convenience method" do
-      expect(person).to accept_values_for(:gender, "MALE", "FEMALE")
-      expect(person).not_to accept_values_for(:gender, "INVALID", "WRONG")
-      expect(person).to accept_values_for(:name, "John")
-      expect(person).not_to accept_values_for(:name, nil)
-    end
+  it "provides the accept_values_for convenience method" do
+    expect(person).to accept_values_for(:gender, "MALE", "FEMALE")
+    expect(person).not_to accept_values_for(:gender, "INVALID", "WRONG")
+    expect(person).to accept_values_for(:name, "John")
+    expect(person).not_to accept_values_for(:name, nil)
   end
 end
