@@ -17,10 +17,8 @@ describe User do
   describe "validation"
     subject(:user) { User.new }
 
-    it "requires a valid email address" do
-      expect(user).to accept_values_for(:email, "john@example.com", "jane@example.org")
-      expect(user).not_to accept_values_for(:email, nil, " ", "john", "john@example")
-    end
+    it { should accept_values_for(:email, "john@example.com", "jane@example.org") }
+    it { should_not accept_values_for(:email, nil, " ", "john", "john@example") }
   end
 end
 ```
