@@ -2,42 +2,21 @@ require "accept_values_for"
 
 Bundler.require(:test)
 
+class Person
+  include ActiveModel::Validations
+
+  attr_accessor :name, :gender
+
+  def initialize(attributes = {})
+    attributes.each do |name, value|
+      self.send("#{name}=", value)
+    end
+  end
+
+  validates_presence_of :name
+  validates_inclusion_of :gender, :in => ["MALE", "FEMALE"]
+end
+
 RSpec.configure do |config|
-  config.before(:suite) do
-    ActiveRecord::Base.establish_connection(
-      :adapter => "sqlite3",
-      :database => ":memory:"
-    )
-
-    ActiveRecord::Schema.verbose = false
-    ActiveRecord::Schema.define(:version => 1) do
-      create_table :groups do |t|
-        t.string :name
-      end
-
-      create_table :people do |t|
-        t.integer :group_id
-        t.string :gender
-        t.string :name
-      end
-    end
-  end
-
-  config.before do
-    class ::Group < ActiveRecord::Base
-      has_many :people
-    end
-
-    class ::Person < ActiveRecord::Base
-      belongs_to :group
-
-      validates_presence_of :group
-      validates_inclusion_of :gender, :in => ["MALE", "FEMALE"]
-    end
-  end
-
-  config.after do
-    Object.send(:remove_const, :Person)
-    Object.send(:remove_const, :Group)
-  end
+  config.order = "random"
 end
