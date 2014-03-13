@@ -1,5 +1,6 @@
 require "accept_values_for"
 
+require "bundler"
 Bundler.require(:test)
 
 RSpec.configure do |config|
