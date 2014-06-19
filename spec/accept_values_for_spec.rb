@@ -8,11 +8,11 @@ describe "AcceptValuesFor" do
     subject { accept_values_for_object.matches?(person) }
     context "when value is accepted" do
       let(:values) { ['MALE'] }
-      it { should be_true }
+      it { should eq(true) }
     end
     context "when value is not accepted" do
       let(:values) { ['INVALID'] }
-      it { should be_false }
+      it { should eq(false) }
       it "should have correct failure message for should" do
         accept_values_for_object.matches?(person)
         accept_values_for_object.failure_message_for_should.should == "expected #{person.inspect} to accept values \"INVALID\" for :gender, but it was not\n\nValue: INVALID\tErrors: gender is not included in the list"
@@ -24,7 +24,7 @@ describe "AcceptValuesFor" do
     end
     context "when 2 values are not accepted" do
       let(:values) { ["INVALID", "WRONG"] }
-      it { should be_false }
+      it { should eq(false) }
       it "should have correct failure message for should" do
         accept_values_for_object.matches?(person)
         accept_values_for_object.failure_message_for_should.should == "expected #{person.inspect} to accept values \"INVALID\", \"WRONG\" for :gender, but it was not\n\nValue: INVALID\tErrors: gender is not included in the list\nValue: WRONG\tErrors: gender is not included in the list"
@@ -32,7 +32,7 @@ describe "AcceptValuesFor" do
     end
     context "when one value is accept and other is not" do
       let(:values) { ['MALE', 'INVALID'] }
-      it { should be_false }
+      it { should eq(false) }
     end
   end
 
@@ -40,11 +40,11 @@ describe "AcceptValuesFor" do
     subject { accept_values_for_object.does_not_match?(person) }
     context "when value is not accepted" do
       let(:values) { ['INVALID'] }
-      it { should be_true }
+      it { should eq(true) }
     end
     context "when value is accepted" do
       let(:values) { ['FEMALE'] }
-      it { should be_false }
+      it { should eq(false) }
       it "should have correct failure message for should" do
         accept_values_for_object.does_not_match?(person)
         accept_values_for_object.failure_message_for_should_not.should == "expected #{person.inspect} to not accept values \"FEMALE\" for :gender attribute, but was"
@@ -56,7 +56,7 @@ describe "AcceptValuesFor" do
     end
     context "when 2 values are accepted" do
       let(:values) { ["FEMALE", "MALE"] }
-      it { should be_false }
+      it { should eq(false) }
       it "should have correct failure message for should" do
         accept_values_for_object.does_not_match?(person)
         accept_values_for_object.failure_message_for_should_not.should == "expected #{person.inspect} to not accept values \"FEMALE\", \"MALE\" for :gender attribute, but was"
@@ -64,7 +64,7 @@ describe "AcceptValuesFor" do
     end
     context "when one value is accept and other is not" do
       let(:values) { ['MALE', 'INVALID'] }
-      it { should be_false }
+      it { should eq(false) }
     end
   end
 
