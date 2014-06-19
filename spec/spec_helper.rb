@@ -2,6 +2,7 @@ require "accept_values_for"
 
 require "bundler"
 Bundler.require(:test)
+I18n.enforce_available_locales = false
 
 RSpec.configure do |config|
   config.before(:suite) do
