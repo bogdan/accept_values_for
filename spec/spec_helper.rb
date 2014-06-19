@@ -42,4 +42,8 @@ RSpec.configure do |config|
     Object.send(:remove_const, :Person)
     Object.send(:remove_const, :Group)
   end
+  
+  config.expect_with(:rspec) do |c|
+    c.syntax = [:should, :expect]
+  end
 end
