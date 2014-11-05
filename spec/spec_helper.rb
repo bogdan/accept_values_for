@@ -34,7 +34,7 @@ RSpec.configure do |config|
       belongs_to :group
 
       validates_presence_of :group
-      validates_inclusion_of :gender, :in => ["MALE", "FEMALE"]
+      validates_inclusion_of :gender, :in => ["MALE", "FEMALE", :male, :female]
     end
   end
 
