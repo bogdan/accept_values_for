@@ -23,11 +23,21 @@ describe "AcceptValuesFor" do
       end
     end
     context "when 2 values are not accepted" do
-      let(:values) { ["INVALID", "WRONG"] }
-      it { should eq(false) }
-      it "should have correct failure message for should" do
-        accept_values_for_object.matches?(person)
-        accept_values_for_object.failure_message_for_should.should == "expected #{person.inspect} to accept values \"INVALID\", \"WRONG\" for :gender, but it was not\n\nValue: INVALID\tErrors: gender is not included in the list\nValue: WRONG\tErrors: gender is not included in the list"
+      context "when classes of 2 values are same" do
+        let(:values) { ["INVALID", "WRONG"] }
+        it { should eq(false) }
+        it "should have correct failure message for should" do
+          accept_values_for_object.matches?(person)
+          accept_values_for_object.failure_message_for_should.should == "expected #{person.inspect} to accept values \"INVALID\", \"WRONG\" for :gender, but it was not\n\nValue: INVALID\tErrors: gender is not included in the list\nValue: WRONG\tErrors: gender is not included in the list"
+        end
+      end
+      context "when classes of 2 values are not same" do
+        let(:values) { ["INVALID", 10] }
+        it { should eq(false) }
+        it "should have correct failure message for should" do
+          accept_values_for_object.matches?(person)
+          accept_values_for_object.failure_message_for_should.should == "expected #{person.inspect} to accept values 10, \"INVALID\" for :gender, but it was not\n\nValue: 10\tErrors: gender is not included in the list\nValue: INVALID\tErrors: gender is not included in the list"
+        end
       end
     end
     context "when one value is accept and other is not" do
@@ -55,11 +65,21 @@ describe "AcceptValuesFor" do
       end
     end
     context "when 2 values are accepted" do
-      let(:values) { ["FEMALE", "MALE"] }
-      it { should eq(false) }
-      it "should have correct failure message for should" do
-        accept_values_for_object.does_not_match?(person)
-        accept_values_for_object.failure_message_for_should_not.should == "expected #{person.inspect} to not accept values \"FEMALE\", \"MALE\" for :gender attribute, but was"
+      context "when classes of 2 values are same" do
+        let(:values) { ["FEMALE", "MALE"] }
+        it { should eq(false) }
+        it "should have correct failure message for should" do
+          accept_values_for_object.does_not_match?(person)
+          accept_values_for_object.failure_message_for_should_not.should == "expected #{person.inspect} to not accept values \"FEMALE\", \"MALE\" for :gender attribute, but was"
+        end
+      end
+      context "when classes of 2 values are not same" do
+        let(:values) { [:male, "FEMALE"] }
+        it { should eq(false) }
+        it "should have correct failure message for should" do
+          accept_values_for_object.does_not_match?(person)
+          accept_values_for_object.failure_message_for_should_not.should == "expected #{person.inspect} to not accept values \"FEMALE\", :male for :gender attribute, but was"
+        end
       end
     end
     context "when one value is accept and other is not" do

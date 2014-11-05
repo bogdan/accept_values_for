@@ -26,7 +26,7 @@ module AcceptValuesFor
 
     def failure_message
       result = "expected #{@model.inspect} to accept values #{formatted_failed_values} for #{@attribute.inspect}, but it was not\n"
-      @failed_values.keys.sort.each do |key|
+      @failed_values.keys.sort(&sort_block).each do |key|
         result << "\nValue: #{key}\tErrors: #{@attribute} #{@failed_values[key]}"
       end
       result
@@ -63,7 +63,11 @@ module AcceptValuesFor
     end
 
     def formatted_failed_values
-      @failed_values.keys.sort.map(&:inspect).join(", ")
+      @failed_values.keys.sort(&sort_block).map(&:inspect).join(", ")
+    end
+
+    def sort_block
+      -> a, b { (a.is_a?(b.class) || b.is_a?(a.class)) ? a <=> b : a.class.name <=> b.class.name }
     end
   end
 end
