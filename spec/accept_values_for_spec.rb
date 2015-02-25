@@ -30,6 +30,20 @@ describe "AcceptValuesFor" do
         accept_values_for_object.failure_message_for_should.should == "expected #{person.inspect} to accept values \"INVALID\", \"WRONG\" for :gender, but it was not\n\nValue: INVALID\tErrors: gender is not included in the list\nValue: WRONG\tErrors: gender is not included in the list"
       end
     end
+    context "when not accepte values of different types" do
+      let(:values) { ['INVALID', nil, 1] }
+      it { should eq(false) }
+      it "should have correct failure message for should" do
+        accept_values_for_object.matches?(person)
+        accept_values_for_object.failure_message_for_should.should == <<MSG.strip
+expected #{person.inspect} to accept values nil, 1, \"INVALID\" for :gender, but it was not
+
+Value: \tErrors: gender is not included in the list
+Value: 1\tErrors: gender is not included in the list
+Value: INVALID\tErrors: gender is not included in the list
+MSG
+      end
+    end
     context "when one value is accept and other is not" do
       let(:values) { ['MALE', 'INVALID'] }
       it { should eq(false) }
