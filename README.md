@@ -14,7 +14,7 @@ Read the [original blog post](http://gusiev.com/2010/06/ultimate-rspec-matcher-t
 
 ```ruby
 describe User do
-  describe "validation"
+  describe "validation" do
     subject(:user) { User.new }
 
     it { should accept_values_for(:email, "john@example.com", "jane@example.org") }
