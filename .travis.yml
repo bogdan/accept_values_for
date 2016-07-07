@@ -1,24 +1,16 @@
 language: ruby
 rvm:
-  - 1.8.7
-  - 1.9.2
-  - 1.9.3
-  - 2.0.0
-  - 2.1.0
+  - 2.1.10
+  - 2.2.5
+  - 2.3.1
 gemfile:
-  - gemfiles/activemodel_3_0.gemfile
-  - gemfiles/activemodel_3_1.gemfile
-  - gemfiles/activemodel_3_2.gemfile
-  - gemfiles/activemodel_4_0.gemfile
+  - gemfiles/activemodel_4_2.gemfile
+  - gemfiles/activemodel_5_0.gemfile
 matrix:
   exclude:
-    - gemfile: gemfiles/activemodel_4_0.gemfile
-      rvm: 1.8.7
-    - gemfile: gemfiles/activemodel_4_0.gemfile
-      rvm: 1.9.2
+    - gemfile: gemfiles/activemodel_5_0.gemfile
+      rvm: 2.1.10
   allow_failures:
-    - rvm: 1.8.7
-    - rvm: 1.9.2
 branches:
   only:
     - master
