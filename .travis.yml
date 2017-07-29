@@ -6,13 +6,10 @@ rvm:
   - 2.4.1
 gemfile:
   - gemfiles/activemodel_4_2.gemfile
-  - gemfiles/activemodel_5_0.gemfile
-  - gemfiles/activemodel_5_1.gemfile
+  - gemfiles/activemodel_5_2.gemfile
 matrix:
   exclude:
-    - gemfile: gemfiles/activemodel_5_0.gemfile
-      rvm: 2.1.10
-    - gemfile: gemfiles/activemodel_5_1.gemfile
+    - gemfile: gemfiles/activemodel_5_2.gemfile
       rvm: 2.1.10
   allow_failures:
 branches:
