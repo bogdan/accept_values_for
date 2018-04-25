@@ -1,9 +1,9 @@
 language: ruby
 rvm:
   - 2.1.10
-  - 2.2.7
-  - 2.3.4
-  - 2.4.1
+  - 2.2.10
+  - 2.3.7
+  - 2.4.4
   - 2.5.1
 gemfile:
   - gemfiles/activemodel_4_2.gemfile
