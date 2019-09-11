@@ -25,8 +25,8 @@ end
 
 ## Dependencies
 
-* Active Model (4 or 5)
-* RSpec (2 or 3)
+* Active Model (5 or 6)
+* RSpec (3)
 
 ## Installation
 

@@ -1,23 +1,20 @@
 language: ruby
 rvm:
-  - 2.1.10
-  - 2.2.10
-  - 2.3.7
-  - 2.4.4
-  - 2.5.1
+  - 2.3.8
+  - 2.4.7
+  - 2.5.6
+  - 2.6.4
 gemfile:
-  - gemfiles/activemodel_4_2.gemfile
   - gemfiles/activemodel_5_0.gemfile
   - gemfiles/activemodel_5_1.gemfile
   - gemfiles/activemodel_5_2.gemfile
+  - gemfiles/activemodel_6_0.gemfile
 matrix:
   exclude:
-    - gemfile: gemfiles/activemodel_5_0.gemfile
-      rvm: 2.1.10
-    - gemfile: gemfiles/activemodel_5_1.gemfile
-      rvm: 2.1.10
-    - gemfile: gemfiles/activemodel_5_2.gemfile
-      rvm: 2.1.10
+    - gemfile: gemfiles/activemodel_6_0.gemfile
+      rvm: 2.3.8
+    - gemfile: gemfiles/activemodel_6_0.gemfile
+      rvm: 2.4.7
   allow_failures:
 branches:
   only:

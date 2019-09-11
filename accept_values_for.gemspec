@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name    = "accept_values_for"
-  spec.version = "0.7.5"
+  spec.version = "0.8.0"
 
   spec.author      = "Bogdan Gusiev"
   spec.email       = "agresso@gmail.com"
@@ -18,8 +18,8 @@ Gem::Specification.new do |spec|
   spec.files      = `git ls-files -z`.split("\x0")
   spec.test_files = spec.files.grep(/^spec/)
 
-  spec.add_dependency "activemodel", ">= 4.2", "< 6.0"
-  spec.add_dependency "rspec", ">= 2.0", "< 4.0"
+  spec.add_dependency "activemodel", ">= 5.0", "< 6.1"
+  spec.add_dependency "rspec", ">= 3.0", "< 4.0"
 
   spec.add_development_dependency "bundler", "~> 1.5"
   spec.add_development_dependency "rake", "~> 10.1"
