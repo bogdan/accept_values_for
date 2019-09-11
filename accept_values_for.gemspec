@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name    = "accept_values_for"
-  spec.version = "0.8.0"
+  spec.version = "0.9.0"
 
   spec.author      = "Bogdan Gusiev"
   spec.email       = "agresso@gmail.com"
