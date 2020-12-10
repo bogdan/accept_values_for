@@ -7,7 +7,7 @@ be accepted by your model and which should not.
 Read the [original blog post](http://gusiev.com/2010/06/ultimate-rspec-matcher-to-test-validation/).
 
 [![Gem Version](https://badge.fury.io/rb/accept_values_for.png)](http://badge.fury.io/rb/accept_values_for)
-[![Build Status](https://travis-ci.org/bogdan/accept_values_for.png?branch=master)](https://travis-ci.org/bogdan/accept_values_for)
+[![Build Status](https://github.com/bogdan/accept_values_for/workflows/CI/badge.svg?branch=master)](https://github.com/bogdan/accept_values_for/actions)
 [![Code Climate](https://codeclimate.com/github/bogdan/accept_values_for.png)](https://codeclimate.com/github/bogdan/accept_values_for)
 
 ## Usage
