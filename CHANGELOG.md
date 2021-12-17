@@ -1,4 +1,8 @@
-# 0.6.0 / Unreleased
+# 0.9.1
+
+* Rails 7.0 support
+
+# 0.6.0
 
 * [ENHANCEMENT] Deprecate Rubies 1.8.7 and 1.9.2
 * [ENHANCEMENT] Remove `discover` matcher
