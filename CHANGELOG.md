@@ -1,3 +1,8 @@
+# 0.9.3
+
+* Rails 7.1 support
+* Support for Ruby 2.6 and 2.7, and Rails 5.2 and 6.0 has been dropped
+
 # 0.9.1
 
 * Rails 7.0 support
