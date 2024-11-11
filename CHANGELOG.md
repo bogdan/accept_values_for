@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.9.5
+
+* Rails 8.0 support
+
 ## 0.9.4
 
 * Test release

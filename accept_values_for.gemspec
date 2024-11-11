@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = spec.homepage
 
-  spec.add_dependency "activemodel", ">= 6.1", "< 8.0"
+  spec.add_dependency "activemodel", ">= 6.1", "< 8.1"
   spec.add_dependency "rspec", ">= 3.10", "< 4.0"
 
   spec.add_development_dependency "bundler", "~> 2.2"
