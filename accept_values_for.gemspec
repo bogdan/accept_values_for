@@ -1,8 +1,10 @@
 # encoding: utf-8
 
+require_relative 'lib/accept_values_for/version'
+
 Gem::Specification.new do |spec|
   spec.name    = "accept_values_for"
-  spec.version = "0.9.4"
+  spec.version = AcceptValuesFor::VERSION
 
   spec.author      = "Bogdan Gusiev"
   spec.email       = "agresso@gmail.com"
