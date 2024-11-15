@@ -1,5 +1,6 @@
 require "rspec"
 
+require "accept_values_for/version"
 require "accept_values_for/helpers"
 require "accept_values_for/matcher"
 
