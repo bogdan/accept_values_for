@@ -1,3 +1,11 @@
+begin
+  # This is only needed for Rails 7.0 and can be removed when we drop support for it
+  require "logger"
+  require "mutex_m"
+rescue LoadError
+  # Rails 7.1+ handles these internally
+end
+
 require "active_model"
 
 module AcceptValuesFor
